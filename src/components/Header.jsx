@@ -7,10 +7,10 @@ function Header() {
     const [btnName, setBtnName] = useState("Login");
     const onlineStatus = useOnlineStatus();
   return (
-    <div className='header'>
-        <div className='logo-container'>
+    <div className='flex justify-between bg-pink-100 shadow-lg items-center px-2'>
+        <div className='logo-container '>
             <img 
-                className='logo'
+                className='w-32'
                 src='logo.png'
             />
         </div>
