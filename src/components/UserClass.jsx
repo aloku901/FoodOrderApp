@@ -23,16 +23,14 @@ class UserClass extends React.Component {
         });
     }
 
-    
-
     render() {
 
         // const {name, location} = this.props;
         const {name, location, avatar_url } = this.state.userinfo;
-        const {count, count2} = this.state;
+        // const {count, count2} = this.state;
         return (
-            <div>
-                <h1>Count: {count}</h1>
+            <div className="m-4 p-4 w-[350px] rounded-lg bg-gray-100 hover:bg-gray-200 flex flex-col items-center shadow-2xl">
+                {/* <h1>Count: {count}</h1>
                 <button
                     onClick={() => {
                         this.setState({
@@ -49,11 +47,12 @@ class UserClass extends React.Component {
                 >Decrease</button>
                 
                 <h1>Count2: {count2}</h1>
-                <hr></hr>
-                <img src={avatar_url}/>
-                <h2>Name: {name}</h2>
-                <h3>Location: {location}</h3>
-                <h4>Contact: @aloku901@gmail.com</h4>
+                <hr></hr> */}
+                
+                <img src={avatar_url} className="w-72 rounded-lg"/>
+                <h2 className="p-4 font-bold text-2xl">Name: {name}</h2>
+                <h3 className="font-semibold text-lg">Location: {location}</h3>
+                <h4 className="text-xs">Contact: aloku901@gmail.com</h4>
             </div>
         )
     }

@@ -50,7 +50,7 @@ function Body() {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter flex items-center">
+      <div className="filter flex items-center justify-center justify-between mx-28">
         <div className="search m-4 p-4">
           <input
             type="text"
