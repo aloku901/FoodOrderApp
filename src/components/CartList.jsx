@@ -1,18 +1,28 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CDN_URL } from "../utils/constants";
-import { addItem } from "../utils/cartSlice";
-import { useState } from "react";
+import { addItem, removeItem, selectCartItems } from "../utils/cartSlice";
+import { useState, useEffect } from "react";
 
 function ItemList({ items }) {
 
   const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
 
-  const handleAddItem = (item) => {
-     dispatch(addItem(item));
+
+  const handleRemoveItem = (item) => {
+     dispatch(removeItem(item));
      console.log(item);
   }
 
   const[subtotal, setSubtotal] = useState(0);
+
+  useEffect(() => {
+    // Calculate subtotal whenever cart items change
+    const newSubtotal = cartItems.reduce((total, item) => {
+      return total + ((item.card.info.price || item.card.info.defaultPrice) / 100);
+    }, 0);
+    setSubtotal(newSubtotal);
+  }, [cartItems]);
 
   return (
     <div>
@@ -36,7 +46,7 @@ function ItemList({ items }) {
               src={CDN_URL + item.card.info.imageId}
               className="rounded"
             />
-            <button className="px-2 bg-white text-green-700 rounded font-bold absolute top-20 right-12" onClick={() => handleAddItem(item)}>ADD</button>
+            <button className="px-2 bg-white text-red-500 rounded font-bold absolute top-20 right-9" onClick={() => handleRemoveItem(item)}>REMOVE</button>
           </div>
         </div>
       ))}
