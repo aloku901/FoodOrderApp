@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { CDN_URL } from "../utils/constants";
-import { addItem, removeItem, selectCartItems } from "../utils/cartSlice";
+import { removeItem, selectCartItems } from "../utils/cartSlice";
 import { useState, useEffect } from "react";
 
 function ItemList({ items }) {

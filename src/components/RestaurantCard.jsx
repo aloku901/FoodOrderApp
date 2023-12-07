@@ -8,7 +8,7 @@ const RestaurantCard = ({resData}) => {
       avgRating,
       cuisines,
       costForTwo,
-      deliveryTime,
+      sla,
     } = resData?.info;
 
   
@@ -24,7 +24,7 @@ const RestaurantCard = ({resData}) => {
         />
         <h3 className="font-bold py-4 text-lg">{name}</h3>
         <p>{cuisines.join(", ")}</p>
-        <h4>{avgRating} ★  .{deliveryTime} mins</h4>
+        <h4>{avgRating} ★  .{sla.deliveryTime} mins</h4>
         <h4>{costForTwo} </h4>
         <h4></h4>
       </div>
