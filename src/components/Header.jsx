@@ -2,9 +2,11 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 function Header() {
   const [btnName, setBtnName] = useState("Login");
+  const onlineStatus = useOnlineStatus();
 
   return (
     <div className="header flex justify-between px-6 pt-5 pb-2 border shadow-lg">
@@ -14,8 +16,11 @@ function Header() {
       <div className="nav-items ">
         <ul className="flex flex-row gap-10 cursor-pointer">
           <li>
-            <Link to="/">Home</Link>
+            {onlineStatus ? "🟢" : "🔴"} 
           </li>
+          <li>
+            <Link to="/">Home</Link>
+          </li> 
           <li>
             <Link to="/about">About</Link>
           </li>

@@ -5,6 +5,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 function Body() {
   const [resList, setReslist] = useState([]);
@@ -33,6 +34,9 @@ function Body() {
         ?.restaurants,
     );
   };
+
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false) return <h1 className="m-10 text-2xl flex justify-center items-center">Looks Like you're offline!! Please check Your Internet Connection</h1>;
 
   // if (resList.length === 0) {
   //   return <Shimmer/>;
