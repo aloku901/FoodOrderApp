@@ -70,4 +70,5 @@ function RestaurantCard({ resData }) {
   );
 }
 
+
 export default RestaurantCard;
