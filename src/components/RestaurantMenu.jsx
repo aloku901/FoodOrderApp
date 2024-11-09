@@ -12,6 +12,8 @@ function RestaurantMenu() {
 
   const resinfo = useRestaurantMenu(resId);
 
+  const [showIndex, setShowIndex] = useState(0);
+
   // useEffect(() => {
   //   fetchMenu();
   // }, []);
@@ -37,7 +39,7 @@ function RestaurantMenu() {
   } = info || {};
 
   console.log(info);
-  
+
   const categories =
     resinfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards.filter(
       (c) =>
@@ -46,7 +48,6 @@ function RestaurantMenu() {
     );
 
   console.log(categories);
-  
 
   const menu =
     resinfo.cards[4].groupedCard.cardGroupMap.REGULAR.cards[2].card.card
@@ -56,7 +57,6 @@ function RestaurantMenu() {
   // console.log(
   //   resinfo.cards[4].groupedCard.cardGroupMap.REGULAR
   // );
-   
 
   return (
     <div className="menu w-7/12 mx-auto mb-20">
@@ -105,8 +105,13 @@ function RestaurantMenu() {
         </h2>
       </div>
 
-      {categories.map((category) => (
-        <RestaurantCategories data={category?.card?.card} />
+      {categories.map((category, index) => (
+        <RestaurantCategories
+          key={category?.card?.card.title}
+          data={category?.card?.card}
+          showItems={index === showIndex ? true : false}
+          setShowIndex={() => setShowIndex(index)}
+        />
       ))}
       {/* <ul>
         {menu.map((item) => (

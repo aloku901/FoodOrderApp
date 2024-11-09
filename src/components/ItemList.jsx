@@ -1,17 +1,16 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import { cloudurl } from "../utils/constant";
+import { Description } from "./Description";
 
 function ItemList({ items }) {
-  console.log(items);
-
   return (
     <div>
       {items.map((item) => (
         <div
           key={item.card.info.id}
-          className="p-4 mx-2 border-gray-400 border-b-2 text-left flex justify-between items-center"
+          className="p-4 mx-2 border-gray-400 border-b-2 text-left flex justify-between"
         >
           <div className="w-9/12">
             <div className="font-bold text-sm text-gray-700">
@@ -47,13 +46,14 @@ function ItemList({ items }) {
                 ({item.card.info.ratings.aggregatedRating.ratingCountV2})
               </span>
             </div>
-            <p className="text-sm font-medium text-gray-600">
-              {item.card.info.description}
-            </p>
+            <Description text={item.card.info.description} className="cursor-pointer"/>
           </div>
           <div className="w-3/12 p-3 relative">
-            <img src={cloudurl + item.card.info.imageId} className="rounded-2xl" />
-            <button className="px-10 py-1 bg-white text-green-700 rounded font-bold absolute top-[145px] left-[30px] shadow">
+            <img
+              src={cloudurl + item.card.info.imageId}
+              className="rounded-2xl w-[165px] h-[130px] object-cover border"
+            />
+            <button className="px-10 py-1 bg-white text-green-700 rounded font-bold absolute top-[130px] left-[26px] shadow-2xl border">
               ADD
             </button>
           </div>
@@ -62,5 +62,8 @@ function ItemList({ items }) {
     </div>
   );
 }
+
+// Description component with Read More functionality
+
 
 export default ItemList;
