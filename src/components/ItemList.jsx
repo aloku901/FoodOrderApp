@@ -3,8 +3,11 @@
 import React, { useState } from "react";
 import { cloudurl } from "../utils/constant";
 import { Description } from "./Description";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 function ItemList({ items }) {
+  const dispatch = useDispatch();
   return (
     <div>
       {items.map((item) => (
@@ -46,14 +49,22 @@ function ItemList({ items }) {
                 ({item.card.info.ratings.aggregatedRating.ratingCountV2})
               </span>
             </div>
-            <Description text={item.card.info.description} className="cursor-pointer"/>
+            <Description
+              text={item.card.info.description}
+              className="cursor-pointer"
+            />
           </div>
           <div className="w-3/12 p-3 relative">
             <img
               src={cloudurl + item.card.info.imageId}
               className="rounded-2xl w-[165px] h-[130px] object-cover border"
             />
-            <button className="px-10 py-1 bg-white text-green-700 rounded font-bold absolute top-[130px] left-[26px] shadow-2xl border">
+            <button
+              className="px-10 py-1 bg-white text-green-700 rounded font-bold absolute top-[130px] left-[26px] shadow-2xl border"
+              onClick={(item) => {
+                dispatch(addItem(item));
+              }}
+            >
               ADD
             </button>
           </div>
@@ -64,6 +75,5 @@ function ItemList({ items }) {
 }
 
 // Description component with Read More functionality
-
 
 export default ItemList;
