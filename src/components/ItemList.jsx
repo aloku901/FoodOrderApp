@@ -8,6 +8,9 @@ import { addItem } from "../utils/cartSlice";
 
 function ItemList({ items }) {
   const dispatch = useDispatch();
+  const handleAddItem = (item) => {
+    dispatch(addItem(item));
+  };
   return (
     <div>
       {items.map((item) => (
@@ -61,9 +64,7 @@ function ItemList({ items }) {
             />
             <button
               className="px-10 py-1 bg-white text-green-700 rounded font-bold absolute top-[130px] left-[26px] shadow-2xl border"
-              onClick={(item) => {
-                dispatch(addItem(item));
-              }}
+              onClick={() => handleAddItem(item)}
             >
               ADD
             </button>
