@@ -4,14 +4,44 @@ import React from "react";
 import { cloudurl } from "../utils/constant";
 
 function RestaurantCard({ resData }) {
+  const truncateCuisines = (cuisines, maxLength = 24) => {
+    const cuisineString = cuisines.join(", ");
+    return cuisineString.length > maxLength
+      ? cuisineString.substring(0, maxLength) + "...."
+      : cuisineString;
+  };
 
   return (
     <div className="res-card w-60 h-80 p-1 rounded-xl cursor-pointer">
-      <img
-        className="res-logo w-[100%] h-[180px] rounded-2xl object-cover"
-        alt="res-logo"
-        src={cloudurl + resData.info.cloudinaryImageId}
-      />
+      <div className="relative w-full h-[180px] rounded-2xl overflow-hidden">
+        <img
+          className="w-full h-full object-cover"
+          alt="res-logo"
+          src={cloudurl + resData.info.cloudinaryImageId}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent">
+          <div
+            className="absolute bottom-2 left-4 text-white text-xl"
+            style={{
+              fontWeight: "1000",
+            }}
+          >
+            {(
+              (resData.info.aggregatedDiscountInfoV3?.header || "") +
+              " " +
+              (resData.info.aggregatedDiscountInfoV3?.subHeader || "")
+            ).length > 15
+              ? (
+                  (resData.info.aggregatedDiscountInfoV3?.header || "") +
+                  " " +
+                  (resData.info.aggregatedDiscountInfoV3?.subHeader || "")
+                ).substring(0, 15) + "..."
+              : (resData.info.aggregatedDiscountInfoV3?.header || "") +
+                " " +
+                (resData.info.aggregatedDiscountInfoV3?.subHeader || "")}
+          </div>
+        </div>
+      </div>
       <div className="ml-1 mt-2">
         <h3 className="p-1 text-lg font-semibold">{resData.info.name}</h3>
         <div className="flex gap-2 items-center">
@@ -60,7 +90,7 @@ function RestaurantCard({ resData }) {
           </p>
         </div>
         <h4 className="leading-4 p-1 font-medium text-gray-500 text-base">
-          {resData.info.cuisines.join(", ")}
+          {truncateCuisines(resData.info.cuisines)}
         </h4>
         <h4 className="leading-4 p-1 font-medium text-gray-500 text-base">
           {resData.info.locality}

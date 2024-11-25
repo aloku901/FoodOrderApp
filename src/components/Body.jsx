@@ -6,19 +6,21 @@ import { useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import { useOutletContext } from "react-router-dom";
 
 function Body() {
+  const { location } = useOutletContext();
   const [resList, setReslist] = useState([]);
   const [filteredrest, setFilteredRest] = useState([]);
   const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [location]);
 
   const fetchData = async () => {
     const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.7040592&lng=77.10249019999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",
+      `https://www.swiggy.com/dapi/restaurants/list/v5?lat=${location.latitude}&lng=${location.longitude}&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`,
     );
 
     const json = await data.json();
